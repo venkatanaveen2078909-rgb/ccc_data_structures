@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Graph Data Structure Simulator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- LEFT CARD -->
+    <div class="card">
+      <h2>
+        Graph Simulator
+        <span class="badge">BFS · DFS · Topo · Shortest Path</span>
+      </h2>
+      <div class="subheading">
+        Build your graph (weighted or unweighted), see the diagram, then run algorithms visually.
+      </div>
+
+      <!-- Graph type -->
+      <div class="section">
+        <div class="section-title">
+          Graph Settings
+          <span class="chip" id="graphTypeLabel">Directed</span>
+        </div>
+        <div class="row">
+          <label class="toggle">
+            <input type="checkbox" id="directedToggle" checked />
+            <span>Directed graph</span>
+          </label>
+          <label class="toggle">
+            <input type="checkbox" id="weightedToggle" checked />
+            <span>Weighted graph</span>
+          </label>
+          <button id="resetGraphBtn" class="secondary danger" type="button">
+            Reset Graph
+          </button>
+        </div>
+      </div>
+
+      <!-- Graph diagram -->
+      <div class="section">
+        <div class="section-title">
+          Graph Diagram
+          <span class="muted">
+            Nodes arranged as a regular polygon by default; you can drag them manually.
+          </span>
+        </div>
+        <div class="graph-canvas-wrapper">
+          <canvas id="graphCanvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Add Nodes -->
+      <div class="section">
+        <div class="section-title">
+          Nodes
+          <span class="muted">Node label can be 1, A, v1, etc.</span>
+        </div>
+        <div class="row" style="margin-bottom: 8px">
+          <input type="text" id="nodeInput" placeholder="Enter node label, e.g. A" />
+          <button id="addNodeBtn" class="secondary" type="button">
+            + Add Node
+          </button>
+        </div>
+        <div id="nodesContainer" class="nodes-container muted">
+          No nodes yet. Add a node to get started.
+        </div>
+      </div>
+
+      <!-- Add Edges -->
+      <div class="section">
+        <div class="section-title">Edges</div>
+        <div class="row" style="margin-bottom: 8px">
+          <select id="fromSelect"></select>
+          <span>→</span>
+          <select id="toSelect"></select>
+          <input
+            type="number"
+            id="weightInput"
+            value="1"
+            min="1"
+            step="1"
+            style="width: 70px"
+            title="Edge weight"
+          />
+          <button id="addEdgeBtn" class="secondary" type="button">
+            + Add Edge
+          </button>
+        </div>
+        <div class="edge-list" id="edgeList"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT CARD -->
+    <div class="card">
+      <h2>
+        Graph Algorithms
+        <span class="badge">Simulation</span>
+      </h2>
+      <div class="subheading">
+        BFS is animated level-by-level (same level together). Shortest path uses BFS (unweighted) or Dijkstra (weighted).
+      </div>
+
+      <div class="section">
+        <div class="section-title">Algorithm Parameters</div>
+        <div class="row" style="margin-bottom: 8px">
+          <label>
+            <span class="muted">Start node</span><br />
+            <select id="startSelect"></select>
+          </label>
+          <label>
+            <span class="muted">End node (for shortest path)</span><br />
+            <select id="endSelect"></select>
+          </label>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">
+          Operations
+          <span class="muted">Animations use a small delay per level/step.</span>
+        </div>
+        <div class="row" style="margin-bottom: 6px">
+          <button id="bfsBtn" class="secondary" type="button">Run BFS</button>
+          <button id="dfsBtn" class="secondary" type="button">Run DFS</button>
+          <button id="topoBtn" class="secondary" type="button">
+            Topological Sort
+          </button>
+        </div>
+        <div class="row">
+          <button id="shortestPathBtn" class="secondary" type="button">
+            Shortest Path
+          </button>
+          <button id="clearHighlightsBtn" class="secondary" type="button">
+            Clear Highlights
+          </button>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="output-title">
+          Output
+          <span id="statusLabel" class="chip">Ready</span>
+        </div>
+        <div id="output" class="output-box muted">
+          Build a graph and run an algorithm. First the answer will be shown, then explanation of the algorithm.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
